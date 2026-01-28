@@ -20,6 +20,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { logout } from '../../redux/slices/authSlice';
+import { fetchStudentDashboardData } from '../../redux/thunks/dashboardThunks';
 
 import styles from './styles';
 import Logo from './../../assets/images/logo.png';
@@ -46,16 +47,23 @@ const DashboardScreen: React.FC = () => {
 
   const { user } = useAppSelector(state => state.auth);
 
-  const { batchCounts, monthlyAttendance, error} =
+  const { batchCounts, monthlyAttendance, error } =
     useAppSelector(state => state.dashboard);
 
   const [loading, setLoading] = useState(true);
 
-  // ---------------- MOCK DATA ----------------
-  
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1200);
-    return () => clearTimeout(timer);
+    let isMounted = true;
+
+    setLoading(true);
+    dispatch(fetchStudentDashboardData())
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleLogout = () => {
@@ -221,7 +229,7 @@ const DashboardScreen: React.FC = () => {
         />
         <View style={{ marginLeft: 16 }}>
           <Text variant="labelMedium">Today’s Classes</Text>
-          <Text variant="headlineMedium">{batchCounts.todaysBatches}</Text>
+          <Text variant="headlineMedium">{batchCounts?.todaysBatches ?? 0}</Text>
         </View>
       </Card.Content>
     </Card>
@@ -247,7 +255,7 @@ const DashboardScreen: React.FC = () => {
             marginBottom: 8,
           }}
         >
-          {monthlyAttendance.percentage}%
+          {Math.max(0, Math.min(100, monthlyAttendance?.percentage ?? 0))}%
         </Text>
 
         <View
@@ -260,12 +268,18 @@ const DashboardScreen: React.FC = () => {
         >
           <View
             style={{
-              width: `${monthlyAttendance.percentage}%`,
+              width: `${Math.max(0, Math.min(100, monthlyAttendance?.percentage ?? 0))}%`,
               height: '100%',
               backgroundColor: theme.colors.primary,
             }}
           />
         </View>
+
+        {!!error && (
+          <Text style={{ color: theme.colors.error, marginTop: 8 }}>
+            {error}
+          </Text>
+        )}
       </Card.Content>
     </Card>
 

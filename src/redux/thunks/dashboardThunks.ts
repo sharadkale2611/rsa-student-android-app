@@ -89,6 +89,7 @@ export const fetchStudentDashboardData = createAsyncThunk<
         getStudentBatchCounts(token),
         getStudentMonthlyAttendance(token),
       ]);
+      console.log("FETCHED DASHBOARD DATA:", { batchCounts, monthlyAttendance });
 
       return { batchCounts, monthlyAttendance };
     } catch (e: any) {
