@@ -21,6 +21,9 @@ const initialState: StudentDashboardState = {
     month: '',
     totalMarkedSessions: 0,
     presentSessions: 0,
+    absentSessions: 0,
+    leaveSessions: 0,
+    lateSessions: 0,
     percentage: 0,
   },
   loading: false,
@@ -40,6 +43,9 @@ const dashboardSlice = createSlice({
         month: '',
         totalMarkedSessions: 0,
         presentSessions: 0,
+        absentSessions: 0,
+        leaveSessions: 0,
+        lateSessions: 0,
         percentage: 0,
       };
       state.loading = false;

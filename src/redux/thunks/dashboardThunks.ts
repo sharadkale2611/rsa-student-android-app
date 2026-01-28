@@ -25,6 +25,9 @@ export type StudentMonthlyAttendance = {
   month: string;
   totalMarkedSessions: number;
   presentSessions: number;
+  absentSessions: number;
+  leaveSessions: number;
+  lateSessions: number;
   percentage: number;
 };
 
@@ -70,6 +73,12 @@ async function getStudentMonthlyAttendance(
       data?.totalMarkedSessions ?? data?.TotalMarkedSessions ?? 0,
     presentSessions:
       data?.presentSessions ?? data?.PresentSessions ?? 0,
+    absentSessions: 
+      data?.absentSessions ?? data?.AbsentSessions ?? 0,
+    leaveSessions:
+      data?.leaveSessions ?? data?.LeaveSessions ?? 0,
+    lateSessions:
+      data?.lateSessions ?? data?.LateSessions ?? 0,
     percentage: data?.percentage ?? data?.Percentage ?? 0,
   };
 }
