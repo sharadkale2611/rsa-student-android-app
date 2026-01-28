@@ -57,9 +57,16 @@ const TodayTimeTableScreen: React.FC = () => {
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
 
       {/* 👈 BACK ARROW APPBAR */}
-      <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
-        <Appbar.Content title="Today's Timetable" />
+
+      <Appbar.Header elevated style={{ backgroundColor: theme.colors.surface }}>
+        <Appbar.BackAction
+          onPress={() => navigation.goBack()}
+          color={theme.colors.primary}
+        />
+        <Appbar.Content
+          title="Today's Timetable"
+          titleStyle={{ fontWeight: '700' }}
+        />
       </Appbar.Header>
 
 
