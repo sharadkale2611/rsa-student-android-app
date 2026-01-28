@@ -1,0 +1,7 @@
+{
+  "extends": "@react-native/typescript-config",
+  "include": ["**/*.ts", "**/*.tsx", "src/screens/Timetable/components"],
+  "exclude": ["**/node_modules", "**/Pods"]
+}
+
+
