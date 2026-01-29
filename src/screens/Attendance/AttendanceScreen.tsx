@@ -48,14 +48,14 @@ const AttendanceScreen: React.FC = () => {
         />
       </View>
 
-      <View style={styles.cardWrapper}>
+      {/* <View style={styles.cardWrapper}>
         <DashboardCard
           title="Attendance Notifications"
           subtitle="Alerts & updates"
           icon="bell"
           onPress={() => navigation.navigate('AttendanceNotifications')}
         />
-      </View>
+      </View> */}
     </ScrollView>
   );
 };

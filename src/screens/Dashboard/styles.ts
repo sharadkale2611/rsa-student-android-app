@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
-        marginTop: 14,
+        marginTop: 0,
         padding: 16,
         paddingBottom: 60,
         

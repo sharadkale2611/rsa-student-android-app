@@ -13,6 +13,7 @@ import attendanceSlice from './slices/attendanceSlice';
 import noticeSlice from './slices/noticeSlice';
 import profileSlice from './slices/profileSlice';
 import dashboardSlice from './slices/dashboardSlice';
+import subjectAttendanceSlice from './slices/subjectAttendanceSlice';
 
 
  
@@ -29,7 +30,9 @@ export const store = configureStore({
         students:studentSlice,
         attendance:attendanceSlice,
         notice:noticeSlice,
-        dashboard: dashboardSlice
+        dashboard: dashboardSlice,
+        subjectAttendance: subjectAttendanceSlice,
+
   
     },
 });

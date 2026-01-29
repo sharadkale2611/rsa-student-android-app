@@ -199,12 +199,12 @@ const DashboardScreen: React.FC = () => {
           Welcome {` `} 
           <Text
             style={{
-              textTransform: 'capitalize',
+              // textTransform: 'capitalize',
               color: theme.colors.primary,
-              fontWeight: '600',
+              fontWeight: '700',
             }}
           >
-            {user?.username || 'Guest'}!
+            {user?.username || 'Guest'}..!!
           </Text>
         </Text>
 
