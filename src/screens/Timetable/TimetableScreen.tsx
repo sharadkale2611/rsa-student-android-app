@@ -29,17 +29,19 @@ const TimetableScreen: React.FC = () => {
         </Text>
       </Card>
 
-      <View style={styles.row}>
+      <View style={styles.cardWrapper}>
         <DashboardCard
           title="Today's Timetable"
           subtitle="View today’s classes"
           icon="calendar-today"
           onPress={() => navigation.navigate('Timetable', {
-                screen: 'TodayTimeTable',
-              })
+            screen: 'TodayTimeTable',
+          })
           }
         />
+      </View>
 
+      <View style={styles.cardWrapper}>
         <DashboardCard
           title="Weekly Timetable"
           subtitle="Full week overview"
@@ -47,6 +49,8 @@ const TimetableScreen: React.FC = () => {
           onPress={() => navigation.navigate('WeeklyTimeTable' as never)}
         />
       </View>
+
+
     </ScrollView>
   );
 };
@@ -63,9 +67,9 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     marginBottom: 22,
   },
-  row: {
-    flexDirection: 'row',
-    gap: 16,
+  cardWrapper: {
+    // flexDirection: 'row',
+    // gap: 16,
     marginBottom: 16,
   },
 });

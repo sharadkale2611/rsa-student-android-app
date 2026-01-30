@@ -38,23 +38,23 @@ const AssignmentScreen: React.FC = () => {
         />
       </View>
 
-      <View style={styles.cardWrapper}>
+      {/* <View style={styles.cardWrapper}>
         <DashboardCard
           title="Upload Assignment Work"
           subtitle="Submit your assignment"
           icon="upload"
           onPress={() => navigation.navigate('UploadAssignment')}
         />
-      </View>
+      </View> */}
 
-      <View style={styles.cardWrapper}>
+      {/* <View style={styles.cardWrapper}>
         <DashboardCard
           title="Marks & Remarks"
           subtitle="View marks and feedback"
           icon="star-circle"
           onPress={() => navigation.navigate('AssignmentMarks')}
         />
-      </View>
+      </View> */}
     </ScrollView>
   );
 };

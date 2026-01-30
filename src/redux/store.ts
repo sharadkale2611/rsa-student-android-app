@@ -7,13 +7,13 @@ import timetableSlice from './slices/timetableSlice';
 import staffSlice from './slices/profileSlice';
 import batchSlice from './slices/batchSlice';
 import studentAssignmentsReducer from './slices/studentAssignmentsSlice';
-import batchStudyWorkReducer from './slices/batchStudyWorkSlice'
 import studentSlice from './slices/studentSlice';
 import attendanceSlice from './slices/attendanceSlice';
 import noticeSlice from './slices/noticeSlice';
 import profileSlice from './slices/profileSlice';
 import dashboardSlice from './slices/dashboardSlice';
 import subjectAttendanceSlice from './slices/subjectAttendanceSlice';
+import batchStudyWorksSlice from './slices/batchStudyWorksSlice';
 
 
  
@@ -26,12 +26,12 @@ export const store = configureStore({
         profile: profileSlice,
         batches: batchSlice,
         studentAssignments: studentAssignmentsReducer,
-        batchStudyWorks: batchStudyWorkReducer,
         students:studentSlice,
         attendance:attendanceSlice,
         notice:noticeSlice,
         dashboard: dashboardSlice,
         subjectAttendance: subjectAttendanceSlice,
+        batchStudyWorks: batchStudyWorksSlice
 
   
     },

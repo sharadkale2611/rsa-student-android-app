@@ -17,7 +17,7 @@ const AttendanceScreen: React.FC = () => {
       ]}
     >
       {/* Header */}
-      {/* <Card style={styles.headerCard} mode="elevated">
+      <Card style={styles.headerCard} mode="elevated">
         <Text variant="titleLarge" style={{ fontWeight: '700' }}>
           Attendance
         </Text>
@@ -27,7 +27,7 @@ const AttendanceScreen: React.FC = () => {
         >
           Track your attendance details
         </Text>
-      </Card> */}
+      </Card>
 
       {/* CARDS (VERTICAL) */}
       <View style={styles.cardWrapper}>
