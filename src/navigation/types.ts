@@ -17,6 +17,8 @@ export type DashboardStackParamList = {
     BatchStudyWorks: undefined;
     SendNotice: undefined;
     NoticeBoard: undefined; // ✅ ADD THIS
+    Exams: undefined;
+    ViewAssignments: undefined;
 };
 
 // ---------- Attendance Stack ----------

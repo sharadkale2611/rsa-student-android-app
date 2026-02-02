@@ -19,6 +19,7 @@ import ChangePasswordScreen from '../screens/ChangePassword/ChangePasswordScreen
 import SendNoticeScreen from '../screens/Notice/SendNoticeScreen';
 import NoticeBoardScreen from '../screens/NoticeBoard/NoticeBoardScreen';
 import SubjectAttendanceScreen from '../screens/SubjectAttendance/SubjectAttendanceScreen';
+import ExamsScreen from '../screens/Exams/ExamsScreen'; 
 
 
 /* ---------------- APP BAR ---------------- */
@@ -31,6 +32,7 @@ import ViewAssignmentsScreen from '../screens/ViewAssignment/ViewAssignmentScree
 import UploadAssignmentScreen from '../screens/UploadAssignment/UploadAssignmentScreen';
 import AssignmentMarksScreen from '../screens/AssignmentMark/AssignmentMarksScreen';
 import StudentProfileScreen from '../screens/StudentProfileScreen/StudentProfileScreen';
+import ViewAssignmentScreen from '../screens/ViewAssignment/ViewAssignmentScreen';
 
 /* ---------------- NAVIGATORS ---------------- */
 const Tab = createBottomTabNavigator();
@@ -77,6 +79,8 @@ const DashboardStackNavigator = () => (
     <DashboardStack.Screen name="PendingAssignment" component={PendingAssignmentScreen} />
     <DashboardStack.Screen name="SendNotice" component={SendNoticeScreen} />
     <DashboardStack.Screen name="NoticeBoard" component={NoticeBoardScreen} />
+    <DashboardStack.Screen name="Exams" component={ExamsScreen} />
+    <DashboardStack.Screen name="ViewAssignments" component={ViewAssignmentScreen} />
   </DashboardStack.Navigator>
 );
 

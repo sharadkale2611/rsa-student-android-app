@@ -86,7 +86,7 @@ const DashboardScreen: React.FC = () => {
   const screenConfig = screenTitles[focusedRouteName];
 
   // const isDashboard = currentRouteName === 'DashboardMain';
- 
+
   const showBackButton =
     currentRouteName === 'StudentProfile' ||
     currentRouteName === 'ChangePassword';
@@ -159,22 +159,22 @@ const DashboardScreen: React.FC = () => {
           />
 
 
-          
+
           {showDashboardActions && (
-           <>
+            <>
               <Appbar.Action
                 icon="account-circle-outline"
                 onPress={() =>
                   dashboardNavigation.navigate('StudentProfile' as never)
                 }
                 color={theme.colors.onPrimary}
-              />           
-            <Appbar.Action
-              icon="lock-reset"
-              onPress={() =>
-                dashboardNavigation.navigate('ChangePassword' as never)
-              }
-              color="#fff"
+              />
+              <Appbar.Action
+                icon="lock-reset"
+                onPress={() =>
+                  dashboardNavigation.navigate('ChangePassword' as never)
+                }
+                color="#fff"
               />
               <Appbar.Action
                 icon="logout"
@@ -182,7 +182,7 @@ const DashboardScreen: React.FC = () => {
                 color={theme.colors.onPrimary}
               />
 
-            </> 
+            </>
           )}
         </Appbar.Header>
       </Portal>
@@ -195,8 +195,8 @@ const DashboardScreen: React.FC = () => {
         ]}
       >
         {/* Welcome */}
-        <Text style={[styles.title, { color: theme.colors.onBackground,marginBottom: 12,  }]}>
-          Welcome {` `} 
+        <Text style={[styles.title, { color: theme.colors.onBackground, marginBottom: 12, }]}>
+          Welcome {` `}
           <Text
             style={{
               // textTransform: 'capitalize',
@@ -210,127 +210,126 @@ const DashboardScreen: React.FC = () => {
 
         {/* ---------------- DASHBOARD BODY ---------------- */}
         {/* ---------------- DASHBOARD BODY ---------------- */}
-{loading ? (
-  <>
-    <SkeletonCard />
-    <SkeletonCard />
-    <SkeletonCard />
-  </>
-) : (
-  <>
-    {/* -------- Today’s Classes -------- */}
-    <Card style={{ marginBottom: 16 }}>
-      <Card.Content style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Avatar.Icon
-          icon="book-outline"
-          size={48}
-          style={{ backgroundColor: theme.colors.primaryContainer }}
-          color={theme.colors.primary}
-        />
-        <View style={{ marginLeft: 16 }}>
-          <Text variant="labelMedium">Today’s Classes</Text>
-          <Text variant="headlineMedium">{batchCounts?.todaysBatches ?? 0}</Text>
-        </View>
-      </Card.Content>
-    </Card>
+        {loading ? (
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
+        ) : (
+          <>
+            {/* -------- Today’s Classes -------- */}
+            <Card style={{ marginBottom: 16 }}>
+              <Card.Content style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Avatar.Icon
+                  icon="book-outline"
+                  size={48}
+                  style={{ backgroundColor: theme.colors.primaryContainer }}
+                  color={theme.colors.primary}
+                />
+                <View style={{ marginLeft: 16 }}>
+                  <Text variant="labelMedium">Today’s Classes</Text>
+                  <Text variant="headlineMedium">{batchCounts?.todaysBatches ?? 0}</Text>
+                </View>
+              </Card.Content>
+            </Card>
 
-    {/* -------- Attendance % -------- */}
-    <Card style={{ marginBottom: 16 }}>
-      <Card.Title
-        title="Attendance"
-        left={(props) => (
-          <Avatar.Icon
-            {...props}
-            icon="clipboard-check-outline"
-            style={{ backgroundColor: theme.colors.primaryContainer }}
-          />
+            {/* -------- Attendance % -------- */}
+            <Card style={{ marginBottom: 16 }}>
+              <Card.Title
+                title="Attendance"
+                left={(props) => (
+                  <Avatar.Icon
+                    {...props}
+                    icon="clipboard-check-outline"
+                    style={{ backgroundColor: theme.colors.primaryContainer }}
+                  />
+                )}
+              />
+              <Card.Content>
+                <Text
+                  style={{
+                    fontSize: 32,
+                    fontWeight: '700',
+                    color: theme.colors.primary,
+                    marginBottom: 8,
+                  }}
+                >
+                  {Math.max(0, Math.min(100, monthlyAttendance?.percentage ?? 0))}%
+                </Text>
+
+                <View
+                  style={{
+                    height: 6,
+                    borderRadius: 4,
+                    backgroundColor: theme.colors.surfaceVariant,
+                    overflow: 'hidden',
+                  }}
+                >
+                  <View
+                    style={{
+                      width: `${Math.max(0, Math.min(100, monthlyAttendance?.percentage ?? 0))}%`,
+                      height: '100%',
+                      backgroundColor: theme.colors.primary,
+                    }}
+                  />
+                </View>
+
+                {!!error && (
+                  <Text style={{ color: theme.colors.error, marginTop: 8 }}>
+                    {error}
+                  </Text>
+                )}
+              </Card.Content>
+            </Card>
+
+            {/* -------- Quick Links -------- */}
+            <Card>
+              <Card.Title
+                title="Quick Links"
+                left={(props) => (
+                  <Avatar.Icon
+                    {...props}
+                    icon="link-variant"
+                    style={{ backgroundColor: theme.colors.primaryContainer }}
+                  />
+                )}
+              />
+              <Card.Content>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginBottom: 10,
+                  }}
+                >
+                  <Button
+                    mode="contained"
+                    style={{ flex: 1, marginRight: 6 }}
+                    onPress={() => dashboardNavigation.navigate('ViewAssignments' as never)}
+                  >
+                    Assignments
+                  </Button>
+
+                  <Button
+                    mode="contained"
+                    style={{ flex: 1, marginLeft: 6 }}
+                  >
+                    Fees
+                  </Button>
+                </View>
+
+                <Button
+                  mode="contained"
+                  icon="file-document-outline"
+                  onPress={() => dashboardNavigation.navigate('Exams' as never)}
+                >
+                  Exams
+                </Button>
+              </Card.Content>
+            </Card>
+          </>
         )}
-      />
-      <Card.Content>
-        <Text
-          style={{
-            fontSize: 32,
-            fontWeight: '700',
-            color: theme.colors.primary,
-            marginBottom: 8,
-          }}
-        >
-          {Math.max(0, Math.min(100, monthlyAttendance?.percentage ?? 0))}%
-        </Text>
-
-        <View
-          style={{
-            height: 6,
-            borderRadius: 4,
-            backgroundColor: theme.colors.surfaceVariant,
-            overflow: 'hidden',
-          }}
-        >
-          <View
-            style={{
-              width: `${Math.max(0, Math.min(100, monthlyAttendance?.percentage ?? 0))}%`,
-              height: '100%',
-              backgroundColor: theme.colors.primary,
-            }}
-          />
-        </View>
-
-        {!!error && (
-          <Text style={{ color: theme.colors.error, marginTop: 8 }}>
-            {error}
-          </Text>
-        )}
-      </Card.Content>
-    </Card>
-
-    {/* -------- Quick Links -------- */}
-    <Card>
-      <Card.Title
-        title="Quick Links"
-        left={(props) => (
-          <Avatar.Icon
-            {...props}
-            icon="link-variant"
-            style={{ backgroundColor: theme.colors.primaryContainer }}
-          />
-        )}
-      />
-      <Card.Content>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginBottom: 10,
-          }}
-        >
-          <Button
-            mode="contained"
-            style={{ flex: 1, marginRight: 6 }}
-            onPress={() =>
-              dashboardNavigation.navigate('Assignments' as never)
-            }
-          >
-            Assignments
-          </Button>
-
-          <Button
-            mode="contained"
-            style={{ flex: 1, marginLeft: 6 }}
-          >
-            Fees
-          </Button>
-        </View>
-
-        <Button
-          mode="contained"
-          icon="file-document-outline"
-        >
-          Exams
-        </Button>
-      </Card.Content>
-    </Card>
-  </>
-)}
       </ScrollView>
     </View>
   );
