@@ -111,7 +111,22 @@ const SubjectAttendanceScreen: React.FC = () => {
           </Text>
         )}
 
-        {!loading && !error && (
+        {!loading && !error && (!items || items.length === 0) && (
+          <View style={styles.emptyState}>
+            <Text
+              variant="titleMedium"
+              style={{
+                color: theme.colors.onSurfaceVariant,
+                fontWeight: '700',
+                letterSpacing: 0.5,
+              }}
+            >
+              NO DATA FOUND
+            </Text>
+          </View>
+        )}
+
+        {!loading && !error && items?.length > 0 && (
           <FlatList
             data={items}
             keyExtractor={(item) => item.moduleId.toString()}
@@ -184,5 +199,12 @@ const styles = StyleSheet.create({
   statBox: {
     alignItems: 'center',
     flex: 1,
+  },
+
+  emptyState: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 40,
   },
 });
