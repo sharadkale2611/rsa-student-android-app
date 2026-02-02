@@ -314,6 +314,7 @@ const DashboardScreen: React.FC = () => {
                   <Button
                     mode="contained"
                     style={{ flex: 1, marginLeft: 6 }}
+                    onPress={() => dashboardNavigation.navigate('Fees' as never)}
                   >
                     Fees
                   </Button>

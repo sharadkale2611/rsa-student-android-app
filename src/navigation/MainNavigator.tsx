@@ -33,6 +33,7 @@ import UploadAssignmentScreen from '../screens/UploadAssignment/UploadAssignment
 import AssignmentMarksScreen from '../screens/AssignmentMark/AssignmentMarksScreen';
 import StudentProfileScreen from '../screens/StudentProfileScreen/StudentProfileScreen';
 import ViewAssignmentScreen from '../screens/ViewAssignment/ViewAssignmentScreen';
+import FeesScreen from '../screens/Fees/FeesScreen';
 
 /* ---------------- NAVIGATORS ---------------- */
 const Tab = createBottomTabNavigator();
@@ -81,6 +82,7 @@ const DashboardStackNavigator = () => (
     <DashboardStack.Screen name="NoticeBoard" component={NoticeBoardScreen} />
     <DashboardStack.Screen name="Exams" component={ExamsScreen} />
     <DashboardStack.Screen name="ViewAssignments" component={ViewAssignmentScreen} />
+    <DashboardStack.Screen name="Fees" component={FeesScreen} />
   </DashboardStack.Navigator>
 );
 

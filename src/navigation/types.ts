@@ -19,6 +19,7 @@ export type DashboardStackParamList = {
     NoticeBoard: undefined; // ✅ ADD THIS
     Exams: undefined;
     ViewAssignments: undefined;
+    Fees: undefined;
 };
 
 // ---------- Attendance Stack ----------

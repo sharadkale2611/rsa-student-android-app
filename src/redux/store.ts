@@ -15,6 +15,7 @@ import dashboardSlice from './slices/dashboardSlice';
 import subjectAttendanceSlice from './slices/subjectAttendanceSlice';
 import batchStudyWorksSlice from './slices/batchStudyWorksSlice';
 import examsSlice from './slices/examsSlice';
+import feesSlice from './slices/feesSlice';
 
 
  
@@ -34,8 +35,7 @@ export const store = configureStore({
         subjectAttendance: subjectAttendanceSlice,
         batchStudyWorks: batchStudyWorksSlice,
         exams: examsSlice,
-
-  
+        fees : feesSlice  
     },
 });
  
