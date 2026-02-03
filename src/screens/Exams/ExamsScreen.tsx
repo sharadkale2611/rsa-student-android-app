@@ -16,6 +16,8 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchMyExams } from '../../redux/thunks/examsThunks';
+import { fetchMyExamMarks } from '../../redux/thunks/examMarksThunks';
+
 
 type TabType = 'all' | 'upcoming' | 'past';
 
@@ -28,11 +30,95 @@ const ExamsScreen: React.FC = () => {
     (state) => state.exams
   );
 
+  const { items: examMarks } = useAppSelector(
+    (state) => state.examMarks
+  );
+
+
   const [tab, setTab] = useState<TabType>(filter);
 
   useEffect(() => {
     dispatch(fetchMyExams({ type: tab }));
   }, [dispatch, tab]);
+
+  useEffect(() => {
+    dispatch(fetchMyExams({ type: tab }));
+    dispatch(fetchMyExamMarks());
+  }, [dispatch, tab]);
+
+  const examMarksMap = examMarks.reduce((acc: any, m: any) => {
+    acc[m.examId] = m;
+    return acc;
+  }, {});
+
+
+  // const renderItem = ({ item }: any) => {
+  //   const examDate = item.examDateTime
+  //     ? new Date(item.examDateTime)
+  //     : null;
+
+  //   const isUpcoming =
+  //     examDate && examDate.getTime() >= Date.now();
+
+  //   return (
+  //     <Card style={styles.card} mode="elevated">
+  //       {/* HEADER */}
+  //       <View style={styles.headerRow}>
+  //         <Text variant="titleMedium" style={styles.examName}>
+  //           {item.examName}
+  //         </Text>
+
+  //         <Chip
+  //           compact
+  //           style={{
+  //             backgroundColor: isUpcoming
+  //               ? theme.colors.secondaryContainer
+  //               : theme.colors.surfaceVariant,
+  //           }}
+  //         >
+  //           {isUpcoming ? 'Upcoming' : 'Completed'}
+  //         </Chip>
+  //       </View>
+
+  //       <Text style={styles.muted}>
+  //         Module: {item.moduleName}
+  //       </Text>
+
+  //       {!!item.courseName && (
+  //         <Text style={styles.muted}>
+  //           Course: {item.courseName}
+  //         </Text>
+  //       )}
+
+  //       {!!examDate && (
+  //         <Text style={styles.date}>
+  //           📅 {examDate.toLocaleString()}
+  //         </Text>
+  //       )}
+
+  //       <View style={styles.metaRow}>
+  //         {!!item.examDurationHrs && (
+  //           <Text style={styles.meta}>
+  //             ⏱ {item.examDurationHrs} hrs
+  //           </Text>
+  //         )}
+
+  //         {!!item.examTotalMarks && (
+  //           <Text style={styles.meta}>
+  //             🎯 {item.examTotalMarks} marks
+  //           </Text>
+  //         )}
+
+  //         {/* {!!item.examPassingMarks && (
+  //           <Text style={styles.meta}>
+  //             ✅ Pass: {item.examPassingMarks}
+  //           </Text>
+  //         )} */}
+  //       </View>
+  //     </Card>
+  //   );
+  // };
+
 
   const renderItem = ({ item }: any) => {
     const examDate = item.examDateTime
@@ -41,6 +127,8 @@ const ExamsScreen: React.FC = () => {
 
     const isUpcoming =
       examDate && examDate.getTime() >= Date.now();
+
+    const mark = examMarksMap[item.examId];
 
     return (
       <Card style={styles.card} mode="elevated">
@@ -78,6 +166,7 @@ const ExamsScreen: React.FC = () => {
           </Text>
         )}
 
+        {/* EXAM META */}
         <View style={styles.metaRow}>
           {!!item.examDurationHrs && (
             <Text style={styles.meta}>
@@ -90,23 +179,43 @@ const ExamsScreen: React.FC = () => {
               🎯 {item.examTotalMarks} marks
             </Text>
           )}
-
-          {/* {!!item.examPassingMarks && (
-            <Text style={styles.meta}>
-              ✅ Pass: {item.examPassingMarks}
-            </Text>
-          )} */}
         </View>
+
+        {/* ✅ EXAM MARKS (ONLY FOR COMPLETED) */}
+        {!isUpcoming && mark && (
+          <View style={styles.marksRow}>
+
+            <Text style={styles.marksText}>
+              Marks Obtained: {mark.markObtained}
+            </Text>
+            <Chip
+              compact
+              style={{
+                backgroundColor:
+                  mark.grade === 'PASS'
+                    ? '#2e7d32'
+                    : '#c62828',
+              }}
+              textStyle={{ color: 'white', fontWeight: '700' }}
+            >
+              {mark.grade}
+            </Chip>
+
+
+          </View>
+        )}
       </Card>
     );
   };
+
+
 
   return (
     <>
       {/* APPBAR */}
       <Appbar.Header elevated style={{ backgroundColor: theme.colors.surface }}>
         <Appbar.BackAction onPress={() => navigation.goBack()} color={theme.colors.primary} />
-        <Appbar.Content title="My Exams"  titleStyle={{ fontWeight: '700' }} />
+        <Appbar.Content title="My Exams" titleStyle={{ fontWeight: '700' }} />
       </Appbar.Header>
 
       {/* BODY */}
@@ -217,4 +326,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     opacity: 0.6,
   },
+
+  marksRow: {
+    marginTop: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+
+  marksText: {
+    fontWeight: '600',
+  },
+
+
 });
