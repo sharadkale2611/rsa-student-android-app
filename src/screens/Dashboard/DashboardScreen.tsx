@@ -13,6 +13,7 @@ import {
   List,
   Chip,
   Portal,
+  Dialog, // ✅ add
 } from 'react-native-paper';
 
 import { useNavigation, useNavigationState } from '@react-navigation/native';
@@ -52,6 +53,9 @@ const DashboardScreen: React.FC = () => {
 
   const [loading, setLoading] = useState(true);
 
+  // ✅ add: logout confirmation dialog state
+  const [logoutDialogVisible, setLogoutDialogVisible] = useState(false);
+
   useEffect(() => {
     let isMounted = true;
 
@@ -64,9 +68,11 @@ const DashboardScreen: React.FC = () => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [dispatch]);
 
-  const handleLogout = () => {
+  // ✅ confirm action
+  const handleConfirmLogout = () => {
+    setLogoutDialogVisible(false);
     dispatch(logout());
     rootNavigation.replace('Auth');
   };
@@ -158,8 +164,6 @@ const DashboardScreen: React.FC = () => {
             }}
           />
 
-
-
           {showDashboardActions && (
             <>
               <Appbar.Action
@@ -174,17 +178,32 @@ const DashboardScreen: React.FC = () => {
                 onPress={() =>
                   dashboardNavigation.navigate('ChangePassword' as never)
                 }
-                color="#fff"
+                color={theme.colors.onPrimary}
               />
               <Appbar.Action
                 icon="logout"
-                onPress={handleLogout}
+                // ✅ changed: show confirmation popup first
+                onPress={() => setLogoutDialogVisible(true)}
                 color={theme.colors.onPrimary}
               />
-
             </>
           )}
         </Appbar.Header>
+
+        {/* ✅ Logout Confirmation Dialog */}
+        <Dialog
+          visible={logoutDialogVisible}
+          onDismiss={() => setLogoutDialogVisible(false)}
+        >
+          <Dialog.Title>Logout</Dialog.Title>
+          <Dialog.Content>
+            <Text>Do you really want to logout?</Text>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={() => setLogoutDialogVisible(false)}>Cancel</Button>
+            <Button onPress={handleConfirmLogout}>Logout</Button>
+          </Dialog.Actions>
+        </Dialog>
       </Portal>
 
       {/* ---------------- CONTENT ---------------- */}
